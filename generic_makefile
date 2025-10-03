@@ -9,15 +9,15 @@
 CC          := gcc
 
 # Name of output program
-TARGET      := c_tutorial
+TARGET      := TODO
 
 # Variables for keeping track of different directories
 SRC_DIR     := src
 INC_DIR     := inc
-OBJ_DIR    	:= obj
-BIN_DIR   	:= bin
+OBJ_DIR	    := obj
+BIN_DIR     := bin
 DEP_DIR     := dep
-RES_DIR		:= res
+#RES_DIR     := res
 SRC_EXT     := c
 DEP_EXT     := d
 OBJ_EXT     := o
@@ -27,26 +27,25 @@ CFLAGS      := -Werror -Wall -std=gnu99
 DEBUG_FLAGS := -Werror -Wall -std=gnu99 -g
 LFLAGS      := -fopenmp -lm
 #INC        := -I$(INC_DIR) -I/usr/local/include
-#INCDEP     := -I$(INC_DIR)
 INC		    := -I$(INC_DIR)
 
 #---------------------------------------------------------------------------------
 # Shouldn't need to edit below this line
 #---------------------------------------------------------------------------------
 #SOURCES    := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
-SOURCES    	:= $(wildcard $(SRC_DIR)/*.$(SRC_EXT))
+SOURCES     := $(wildcard $(SRC_DIR)/*.$(SRC_EXT))
 OBJECTS     := $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SOURCES:.$(SRC_EXT)=.$(OBJ_EXT)))
 DEPENDS     := $(patsubst $(OBJ_DIR)/%,$(DEP_DIR)/%,$(OBJECTS:.$(OBJ_EXT)=.$(DEP_EXT)))
 
 # Default Make
-all: resources $(TARGET)
+all:  directories $(TARGET)
 
 # Remake
 redo: cleaner all
 
 # Copy Resources from Resources Directory to Target Directory
-resources: directories
-	cp $(RES_DIR)/* $(BIN_DIR)/
+#resources: directories
+#	cp $(RES_DIR)/* $(BIN_DIR)/
 
 # Make the Directories
 directories:
@@ -80,4 +79,5 @@ $(OBJ_DIR)/%.$(OBJ_EXT): $(SRC_DIR)/%.$(SRC_EXT)
 
 
 #Non-File Targets
-.PHONY: all redo clean cleaner resources directories
+#.PHONY: all redo clean cleaner resources directories
+.PHONY: all redo clean cleaner directories
